@@ -1,0 +1,5 @@
+root - INFO - Testing import_data: SUCCESS
+root - INFO - EDA completed successfully
+root - INFO - EDA encoder was successful in its function
+root - INFO - Data has been split correctly
+root - INFO - Models have been trained and saved successfully!
