@@ -46,23 +46,28 @@ def perform_eda(df):
         store_path = "./images/eda/"
         plt.figure(figsize=(20,10)) 
         df['Churn'].hist()
-        plt.savefig(store_path+'churn_histogram.png')
+        plt.savefig(store_path+'Churn.png')
+        plt.close()
 
         plt.figure(figsize=(20,10)) 
         df['Customer_Age'].hist()
-        plt.savefig(store_path+'customer_age_histogram.png')
+        plt.savefig(store_path+'Customer_Age.png')
+        plt.close()
 
         plt.figure(figsize=(20,10)) 
         df.Marital_Status.value_counts('normalize').plot(kind='bar')
-        plt.savefig(store_path+'marital_status_bar_chart.png')
+        plt.savefig(store_path+'Marital_Status.png')
+        plt.close()
 
         plt.figure(figsize=(20,10)) 
         sns.histplot(df['Total_Trans_Ct'], stat='density', kde=True)
-        plt.savefig(store_path+'total_transactions_histogram.png')
+        plt.savefig(store_path+'Total_Trans_Ct.png')
+        plt.close()
 
         plt.figure(figsize=(20,10)) 
         sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
-        plt.savefig(store_path+'correlation_heatmap.png')
+        plt.savefig(store_path+'heatmap.png')
+        plt.close()
 
 
 def encoder_helper(df, category_lst, response):
@@ -138,21 +143,33 @@ def classification_report_image(y_train,
                 None
         '''
         store_path = './images/results/'
-        rf_test_report = classification_report(y_test, y_test_preds_rf, output_dict=True)
-        rf_test_report_df = pd.DataFrame(rf_test_report).transpose()
-        rf_test_report_df.to_html(store_path+'rf_test_report_df.html')
+        plt.figure(figsize=(5, 5))
+        plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') 
+        plt.axis('off')
+        plt.savefig(store_path+'rf_test.png')
+        plt.close()
 
-        rf_train_report = classification_report(y_train, y_train_preds_rf, output_dict=True)
-        rf_train_report_df = pd.DataFrame(rf_train_report).transpose()
-        rf_train_report_df.to_html(store_path+'rf_train_report_df.html')
+        plt.figure(figsize=(5, 5))
+        plt.text(0.01, 0.6, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.05, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') 
+        plt.axis('off')
+        plt.savefig(store_path+'rf_train.png')
+        plt.close()
 
-        lr_test_report = classification_report(y_test, y_test_preds_lr, output_dict=True)
-        lr_test_report_df = pd.DataFrame(lr_test_report).transpose()
-        lr_test_report_df.to_html(store_path+'lr_test_report_df.html')
+        plt.figure(figsize=(5, 5))
+        plt.text(0.01, 0.6, str('Logistic Regression Test'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') 
+        plt.axis('off')
+        plt.savefig(store_path+'lr_test.png')
+        plt.close()
 
-        lr_train_report = classification_report(y_train, y_train_preds_lr, output_dict=True)
-        lr_train_report_df = pd.DataFrame(lr_train_report).transpose()
-        lr_train_report_df.to_html(store_path+'lr_train_report_df.html')
+        plt.figure(figsize=(5, 5))
+        plt.text(0.01, 0.6, str('Logistic Regression Train'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.05, str(classification_report(y_train, y_train_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') 
+        plt.axis('off')
+        plt.savefig(store_path+'lr_train.png')
+        plt.close()
 
 
 def feature_importance_plot(model, X_data, output_pth):
@@ -190,6 +207,9 @@ def feature_importance_plot(model, X_data, output_pth):
 
         # Save the plot to path
         plt.savefig(output_pth+'feature_importance_plot.png')
+
+        # Close the plot
+        plt.close()
 
 
 def train_models(X_train, X_test, y_train, y_test):
