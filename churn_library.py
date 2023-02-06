@@ -13,7 +13,7 @@ import seaborn as sns
 import joblib
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, plot_roc_curve
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
@@ -279,6 +279,18 @@ def train_models(x_training, x_testing, y_training, y_testing):
         y_test_preds_lr,
         y_test_preds_rf
     )
+
+    # Plot and save ROC curve for LR 
+    plt.figure(figsize=(15, 8))
+    plot_roc_curve(lrc, x_testing, y_testing)
+    plt.savefig('./images/results/' + 'lr_roc_curve.png')
+    plt.close()
+
+    # Plot and save ROC curve for RF 
+    plt.figure(figsize=(15, 8))
+    plot_roc_curve(cv_rfc.best_estimator_, x_testing, y_testing)
+    plt.savefig('./images/results/' + 'rf_roc_curve.png')
+    plt.close()
 
     # Save best model
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
