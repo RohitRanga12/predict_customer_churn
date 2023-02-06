@@ -1,4 +1,11 @@
-import os
+# library doc string
+"""
+This module is to test the functions in churn_library.py script
+Author: Rohit
+Date: 6 Feb 2023
+"""
+
+# import libraries
 from os import path
 import logging
 from churn_library import import_data, perform_eda, encoder_helper, \
@@ -10,32 +17,32 @@ logging.basicConfig(
     filemode='w',
     format='%(name)s - %(levelname)s - %(message)s')
 
-def test_import(import_data):
+def test_import():
 	'''
 	test data import - this example is completed for you to assist with the other test functions
 	'''
 	try:
-		df = import_data("./data/bank_data.csv")
+		dataframe = import_data("./data/bank_data.csv")
 		logging.info("Testing import_data: SUCCESS")
 	except FileNotFoundError as err:
 		logging.error("Testing import_eda: The file wasn't found")
 		raise err
 
 	try:
-		assert df.shape[0] > 0
-		assert df.shape[1] > 0
+		assert dataframe.shape[0] > 0
+		assert dataframe.shape[1] > 0
 	except AssertionError as err:
 		logging.error("Testing import_data: The file doesn't appear to have rows and columns")
 		raise err
 
 
-def test_eda(perform_eda):
+def test_eda():
 	'''
 	test perform eda function
 	'''
-	df = import_data("./data/bank_data.csv")
+	dataframe = import_data("./data/bank_data.csv")
 	try:
-		perform_eda(df)
+		perform_eda(dataframe)
 		features = ['Churn', 'Customer_Age', 'Marital_Status', 'Total_Trans_Ct', 'heatmap']
 		for feature in features:
 			assert path.isfile('./images/eda/'+feature+'.png')
@@ -45,70 +52,70 @@ def test_eda(perform_eda):
 		raise err
 
 
-def test_encoder_helper(encoder_helper):
+def test_encoder_helper():
 	'''
 	test encoder helper
 	'''
-	df = import_data("./data/bank_data.csv")
-	perform_eda(df)
+	dataframe = import_data("./data/bank_data.csv")
+	perform_eda(dataframe)
 	category_lst = [
 		'Gender',
 		'Education_Level',
 		'Marital_Status',
 		'Income_Category',
-		'Card_Category'                
+		'Card_Category'
 	]
 	try:
-		df = encoder_helper(df, category_lst, '')
+		dataframe = encoder_helper(dataframe, category_lst)
 		for category in category_lst:
-			assert category+'_Churn' in df.columns
+			assert category+'_Churn' in dataframe.columns
 		logging.info("EDA encoder was successful in its function")
 	except AssertionError as err:
 		logging.error("EDA encoder not working properly. Please check the function")
 		raise err
 
 
-def test_perform_feature_engineering(perform_feature_engineering):
+def test_perform_feature_engineering():
 	'''
 	test perform_feature_engineering
 	'''
-	df = import_data("./data/bank_data.csv")
-	perform_eda(df)
+	dataframe = import_data("./data/bank_data.csv")
+	perform_eda(dataframe)
 	category_lst = [
 			'Gender',
 			'Education_Level',
 			'Marital_Status',
 			'Income_Category',
-			'Card_Category'                
+			'Card_Category'
 		]
-	df = encoder_helper(df, category_lst, '')
+	dataframe = encoder_helper(dataframe, category_lst)
 	try:
-		X_train, X_test, y_train, y_test = perform_feature_engineering(df, '')
-		assert len(X_train) == len(y_train)
-		assert len(X_test) == len(y_test)
+		x_train, x_test, y_train, y_test = perform_feature_engineering(dataframe)
+		assert len(x_train) == len(y_train)
+		assert len(x_test) == len(y_test)
 		logging.info("Data has been split correctly")
 	except AssertionError as err:
 		logging.error("Data has not been split correctly")
 		raise err
 
 
-def test_train_models(train_models):
+def test_train_models():
 	'''
 	test train_models
 	'''
-	df = import_data("./data/bank_data.csv")
-	perform_eda(df)
+	dataframe = import_data("./data/bank_data.csv")
+	perform_eda(dataframe)
 	category_lst = [
 			'Gender',
 			'Education_Level',
 			'Marital_Status',
 			'Income_Category',
-			'Card_Category'                
+			'Card_Category'
 		]
-	df = encoder_helper(df, category_lst, '')
-	X_train, X_test, y_train, y_test = perform_feature_engineering(df, '')
+	dataframe = encoder_helper(dataframe, category_lst)
+	x_train, x_test, y_train, y_test = perform_feature_engineering(dataframe)
 	try:
-		train_models(X_train, X_test, y_train, y_test)
+		train_models(x_train, x_test, y_train, y_test)
 		assert path.isfile('./models/logistic_model.pkl')
 		assert path.isfile('./models/rfc_model.pkl')
 		logging.info("Models have been trained and saved successfully!")
@@ -117,15 +124,8 @@ def test_train_models(train_models):
 		raise err
 
 if __name__ == "__main__":
-	test_import(import_data)
-	test_eda(perform_eda)
-	test_encoder_helper(encoder_helper)
-	test_perform_feature_engineering(perform_feature_engineering)
-	test_train_models(train_models)
-
-
-
-
-
-
-
+	test_import()
+	test_eda()
+	test_encoder_helper()
+	test_perform_feature_engineering()
+	test_train_models()
