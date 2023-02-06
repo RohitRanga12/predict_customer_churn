@@ -3,7 +3,7 @@
 - Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity
 
 ## Project Description
-- This is a project to implement best coding practices. 
+- This is a project to implement testing, logging and best coding practices. 
 - Goal: Identify credit card customers that are most likely to churn, by implementing the engineering and software best practices
 
 ## Files and data description
@@ -48,7 +48,7 @@ How do you run your files? What should happen when you run your files?
 - in order to test the pep8 styling, run the below commands
 
     <code>pylint churn_library.py</code>
-    
+
     <code>pylint churn_script_logging_and_tests.py</code>
 
 
