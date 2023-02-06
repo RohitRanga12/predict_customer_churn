@@ -31,10 +31,14 @@ How do you run your files? What should happen when you run your files?
 - cd into the project root directory
 - activate the conda environment that contains all required packages for running the project
 - run the following commands:
+
     => python churn_library.py
+
         - This will generate the .png files inside images/eda and images/results folders
         - This will also generate the .pkl model files inside models/ folder
+
     => python churn_script_logging_and_tests.py
+    
         - This will generate the .log file inside logs/ folder
 
 
