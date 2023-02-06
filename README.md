@@ -46,7 +46,9 @@ How do you run your files? What should happen when you run your files?
         - This will generate the .log file inside logs/ folder
 
 - in order to test the pep8 styling, run the below commands
+
     <code>pylint churn_library.py</code>
+    
     <code>pylint churn_script_logging_and_tests.py</code>
 
 
