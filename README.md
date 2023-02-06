@@ -29,22 +29,25 @@ Overview of the files and data present in the root directory.
 How do you run your files? What should happen when you run your files?
 
 - cd into the project root directory
-- activate the conda environment that contains all required packages for running the project,
-by running the below command 
+
+- activate the conda environment that contains all required packages for running the project, by running the below command 
     
-    => conda create --name <env> --file requirements_py3.8.txt
+    <code>conda create --name <env> --file requirements_py3.8.txt</code>
 
 - run the following commands:
 
-    => python churn_library.py
+    <code>python churn_library.py</code>
 
         - This will generate the .png files inside images/eda and images/results folders
         - This will also generate the .pkl model files inside models/ folder
 
-    => python churn_script_logging_and_tests.py
+    <code>python churn_script_logging_and_tests.py</code>
 
         - This will generate the .log file inside logs/ folder
 
+- in order to test the pep8 styling, run the below commands
+    <code>pylint churn_library.py</code>
+    <code>pylint churn_script_logging_and_tests.py</code>
 
 
 
